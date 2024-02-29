@@ -1,0 +1,160 @@
+
+<mat-horizontal-stepper>
+    <mat-step [stepControl]="ProfileForm">
+      <form [formGroup]="ProfileForm">
+        <ng-template matStepLabel>Basic Information</ng-template>
+    <mat-form-field appearance="outline">
+       <mat-label>firstName</mat-label>
+    <input matInput formControlName="firstName" placeholder="firstName">
+    
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label>lastName</mat-label>
+ <input matInput formControlName="lastName" placeholder="lastName">
+ 
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label>gender</mat-label>
+    <select matNativeControl formControlName="gender" >
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="haemophrodite">Haemophrodite</option>
+        <option value="others">Others</option>
+    </select>
+</mat-form-field> 
+<mat-form-field appearance="outline">
+    <mat-label>Date Of Birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="D.O.B">
+    <mat-hint>MM/DD/YY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field appearance="outline">
+    <mat-label>National ID NO.</mat-label>
+    <input matInput formControlName="nationalIdNo" placeholder=" National ID NO.">
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label>Religion</mat-label>
+    <select matNativeControl formControlName="religion" placeholder="Religion">
+        <option value="Christianity">Christianity</option>
+        <option value="Islamic">Islamic</option>
+         <option value="Hinduism">Hinduism</option>
+         <option value="option">Others</option>
+    </select>
+</mat-form-field>
+<mat-form-field appearance="outline">
+    <mat-label>Marital Status</mat-label>
+    <select matNativeControl formControlName="maritalStatus" placeholder="Marital Status">
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+         <option value="Divorced">Divorced</option>
+         <option value="Others">Others</option>
+    </select>
+</mat-form-field>l
+  <div>
+    <button type="button" type="button" mat-raised-button color="primary" mat-button mat-button matStepperSave>save</button>
+    <button type="button" type="button" mat-raised-button color="primary" mat-button mat-button matStepperNext>next </button>
+  </div>
+    
+</form>
+</mat-step>
+<mat-step [stepControl]="contactInfo">
+    <form [formGroup]="contactInfo">
+        <ng-template matStepLabel>Contact Information</ng-template>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Primary Phone no.</mat-label>
+            <input matInput formControlName="PrimaryPhoneno" placeholder="+254714211111">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Secondary Phone no.</mat-label>
+            <input matInput formControlName="SecondaryPhoneno" placeholder="+25471411111">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="emailAdress"
+           placeholder="Ex. pat@example.com">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Social media</mat-label>
+            <input matInput formControlName="SocialMedia" placeholder="e.g facebook">
+          </mat-form-field>
+          <div>
+            <button type="button" mat-raised-button color="primary" mat-button matStepperSave>save</button>
+            <button type="button" mat-raised-button color="primary" mat-button matStepperNext>next</button>
+            <button type="button" mat-raised-button color="primary" mat-button matStepperPrevious>previous</button>
+          </div>
+    </form>
+
+</mat-step>
+<mat-step [stepControl]="educationBackground">
+<form [formGroup]="educationBackground">
+  <ng-template matStepLabel>Education Background</ng-template>
+  <mat-form-field appearance="outline">
+    <select matNativeControl="highestLevelofEducationAttained" placeholder="Masters">
+    <option value="PHD">PHD</option>
+    <option value="Masters">Masters</option>
+    <option value="Degree">Degree</option>
+    <option value="O level">o level</option>
+  </select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Name of Istitution</mat-label>
+    <input matInput formControlName="nameofInstitution" placeholder="Moi University">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Location of Institution</mat-label>
+    <input matInput formControlName="locationofInstitution" placeholder="Nairobi">
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Dates Attended</mat-label>
+    <mat-date-range-input [rangePicker]="picker" formControlName="dateRange">
+      <input matStartDate placeholder="Start Date">
+      <input matEndDate placeholder="End Date">
+    </mat-date-range-input>
+    
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <input type="file" (change)="onFilesSelected($event)" #fileInput style="display: none;" multiple accept=".txt,.pdf,.doc,.docx">
+
+<button mat-raised-button color="primary" (click)="fileInput.click()">Choose Files</button>
+<button mat-raised-button color="primary" *ngIf="selectedFiles.length > 0" (click)="uploadFiles()">Upload Files</button>
+<button mat-raised-button color="primary" (click)="downloadFile()">Download File</button>
+
+<div *ngIf="selectedFiles.length > 0">
+  Selected Files:
+  <ul>
+    <li *ngFor="let file of selectedFiles">
+      {{ file.name }} ({{ file.type }})
+    </li>
+  </ul>
+</div>
+
+<div>
+  <button type="button" mat-raised-button color="primary" mat-button matStepperSave>save</button>
+  <button type="button" mat-raised-button color="primary" mat-button matStepperPrevious>previous</button>
+</div><br>
+
+  
+</form>
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</mat-step>
+
+</mat-horizontal-stepper>
+
+
+
+
+
+     
+
+  
+  
